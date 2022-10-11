@@ -17,3 +17,6 @@ export const defaultTheme = {
   } as const
 
 // FONT: font-family: 'Nunito', sans-serif;
+// FONT: font-size: 12 14 16 18 20 24
+// FONT: line-height: 160%
+// FONT: font-weight: Regular & Bold
