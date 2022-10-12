@@ -8,4 +8,12 @@ export const Header = styled.div`
     background-position: top; 
     background-repeat: no-repeat; 
     background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    img{
+       max-width: 148px;
+       transform: translateY(-40%);
+    }
 `;

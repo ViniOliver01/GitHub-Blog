@@ -2,10 +2,30 @@ import { Container, Post, PostArea, ProfileArea, ProfileIconArea, ProfileImg, Pr
 import gitHub from "../../assets/svg/arrow-up-right-from-square-solid.svg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import api from "../../services/api";
+import { useEffect, useState } from "react";
 
+interface PostProps {
+  id: number;
+  title: string;
+  description: string;
+}
 
 export function Home(){
+  const [posts, setPosts] = useState<PostProps[]>([]);
 
+  useEffect(() => {
+    api
+      .get("/posts")
+      .then((response) => {
+        setPosts(response.data)
+      })
+      .catch((err) => {
+        console.error("ops! ocorreu um erro" + err);
+      });
+
+  }, []);
+  
   return (
     <Container>
         <ProfileArea>
@@ -35,50 +55,17 @@ export function Home(){
           <SearchComponent type="text" placeholder="Buscar conteúdo"/>
         </SearchArea>
         <PostArea>
-
-          <Post>
-            <div>
-              <h2>JavaScript data types and data structures</h2>
-              <span>Há 1 dia</span>
-            </div>
-            <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in </p>
-          </Post>
-          <Post>
-            <div>
-              <h2>JavaScript data types and data structures</h2>
-              <span>Há 1 dia</span>
-            </div>
-            <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in </p>
-          </Post>
-          <Post>
-            <div>
-              <h2>JavaScript data types and data structures</h2>
-              <span>Há 1 dia</span>
-            </div>
-            <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in </p>
-          </Post>
-          <Post>
-            <div>
-              <h2>JavaScript data types and data structures</h2>
-              <span>Há 1 dia</span>
-            </div>
-            <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in </p>
-          </Post>
-          <Post>
-            <div>
-              <h2>JavaScript data types and data structures</h2>
-              <span>Há 1 dia</span>
-            </div>
-            <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in </p>
-          </Post>
-          <Post>
-            <div>
-              <h2>JavaScript data types and data structures</h2>
-              <span>Há 1 dia</span>
-            </div>
-            <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in </p>
-          </Post>
-
+            {posts.map(post => {
+              return (
+                <Post key={post.id}>
+                  <div>
+                    <h2>{post.title}</h2>
+                    <span>Há 1 dia</span>
+                  </div>
+                  <p>{post.description}</p>
+                </Post>
+              )
+            })}
         </PostArea>
     </Container>
   );

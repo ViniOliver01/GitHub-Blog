@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    margin-inline: auto;
-    max-width: 54rem;
+    margin: auto;
+    max-width: 74rem;
+    padding-inline: 10vw;
 `;  
 
 export const ProfileArea = styled.div`
