@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { LayoutContainer } from '../components/header/LayoutContainer';
 
-import { Home } from '../pages/Home/home';
+import { Home } from '../pages/Home/Home';
 // import { DefaultLayout } from './../components/DefaultLayout/DefaultLayout';
 
 
