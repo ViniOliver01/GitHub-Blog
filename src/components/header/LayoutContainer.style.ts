@@ -5,7 +5,7 @@ export const Header = styled.div`
     height: 296px;
     background-image: url("../src/assets/Cover.png");
     background-color: #cccccc;
-    background-position: center; 
+    background-position: top; 
     background-repeat: no-repeat; 
     background-size: cover;
 `;
