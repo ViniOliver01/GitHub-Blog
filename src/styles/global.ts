@@ -33,16 +33,30 @@ export const GlobalStyle = createGlobalStyle`
         color: ${props => props.theme['base-subtitle']};
         font-size: 18px;
     }
+    h4{
+        color: ${props => props.theme['base-subtitle']};
+        font-size: 16px;
+    }
     p{
         color: ${props => props.theme['base-text']};
         font-size: 16px;
     }
     span{
         color: ${props => props.theme['base-span']};
+        font-size: 16px;
+    }
+    small{
+        color: ${props => props.theme['base-span']};
         font-size: 14px;
     }
     a{
         color: ${props => props.theme['blue']};
         font-size: 12px;
+        text-decoration: none;
+    }
+    code{
+        font-family: 'Fira Code', monospace;
+        line-height: 160%;
+        font-size: 16px;
     }
 `;

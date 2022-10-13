@@ -55,7 +55,8 @@ export const ProfileIconArea = styled.div`
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    p{  
+    color: ${props => props.theme['base-label']};
+    h4{  
         display: flex;
         align-items: center;
         gap: 0.5rem;

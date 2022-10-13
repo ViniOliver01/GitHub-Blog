@@ -11,8 +11,11 @@ import { PostsContext } from "../../context/PostsContext";
 export const dateFormatter = new Intl.DateTimeFormat('pt-BR');
 
 export function Home(){
-  const { posts } = useContext(PostsContext);
+  const { posts, totalPosts, user } = useContext(PostsContext);
   const navigate = useNavigate();
+
+  console.log(posts)
+  
 
   function calcTimePassed(time: string){
     const timePassed = new Date(time);
@@ -29,17 +32,14 @@ export function Home(){
           <ProfileImg src={'https://github.com/vinioliver01.png'} alt="" />
           <ProfileInfo>
             <span>
-                <h1>Cameron Williamson </h1> 
+                <h1>{user.name}</h1> 
                 <a href="">GITHUB <FontAwesomeIcon icon={faGithub} /></a>
             </span>
-            
-            {/* https://api.github.com/users/vinioliver01 */}
-                
-            <p>Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat pulvinar vel mass.</p>
+               <p>{user.bio}</p> 
             <ProfileIconArea>
-                <p><FontAwesomeIcon icon={faGithub} /> cameronwll</p>
-                <p><FontAwesomeIcon icon={faGithub} /> cameronwll</p>
-                <p><FontAwesomeIcon icon={faGithub} /> cameronwll</p>
+                <h4><FontAwesomeIcon icon={faGithub} /> {user.blog}</h4>
+                <h4><FontAwesomeIcon icon={faGithub} /> cameronwll</h4>
+                <h4><FontAwesomeIcon icon={faGithub} /> cameronwll</h4>
             </ProfileIconArea>
           </ProfileInfo>
         </ProfileArea>
@@ -47,7 +47,7 @@ export function Home(){
         <SearchArea>
           <div>
             <h3>Publicações</h3>
-            <span>{posts.length} {posts.length == 1 ? "publicação" : "publicações"}</span>
+            <small>{totalPosts} {totalPosts == 1 ? "publicação" : "publicações"}</small>
           </div>
           <SearchComponent type="text" placeholder="Buscar conteúdo"/>
         </SearchArea>
@@ -58,12 +58,21 @@ export function Home(){
                 <Post key={post.id} onClick={() => {navigate(`/post/${post.id}`);}}>
                   <div>
                     <h2>{post.title}</h2> 
-                    <span>{calcTimePassed(post.create_at)}</span> 
+                    <span>{calcTimePassed(post.created_at)}</span> 
                   </div>
-                  <p>{post.description}</p>
+                  <p>{post.body}</p>
                 </Post>
               )
             })}
+
+
+            {/* //   id: response.data.items[0].id,
+            //   title: response.data.items[0].title,
+            //   description: response.data.items[0].body,
+            //   body: response.data.items[0].body,
+            //   owner: response.data.items[0].user.login,
+            //   create_at: response.data.items[0].created_at */}
+
         </PostArea>
     </Container>
   );
