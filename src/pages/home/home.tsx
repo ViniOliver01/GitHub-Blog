@@ -2,23 +2,17 @@ import { Container, Post, PostArea, ProfileArea, ProfileIconArea, ProfileImg, Pr
 import gitHub from "../../assets/svg/arrow-up-right-from-square-solid.svg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import api from "../../services/api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
-
-interface PostProps {
-  id: number;
-  title: string;
-  description: string;
-  create_at: string;
-}
+import { useNavigate } from "react-router-dom";
+import { PostsContext } from "../../context/PostsContext";
 
 export const dateFormatter = new Intl.DateTimeFormat('pt-BR');
 
 export function Home(){
-  const [posts, setPosts] = useState<PostProps[]>([]);
-  const relative = new Intl.RelativeTimeFormat('pt-BR', { numeric: 'always' });
+  const { posts } = useContext(PostsContext);
+  const navigate = useNavigate();
 
   function calcTimePassed(time: string){
     const timePassed = new Date(time);
@@ -28,19 +22,6 @@ export function Home(){
     })
     return newDate
   }
-
-  useEffect(() => {
-    api
-      .get("/posts")
-      .then((response) => {
-        setPosts(response.data)
-      })
-      .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
-      });
-
-  }, []);
-  
   
   return (
     <Container>
@@ -74,7 +55,7 @@ export function Home(){
         <PostArea>
             {posts.map(post => {
               return (
-                <Post key={post.id}>
+                <Post key={post.id} onClick={() => {navigate(`/post/${post.id}`);}}>
                   <div>
                     <h2>{post.title}</h2> 
                     <span>{calcTimePassed(post.create_at)}</span> 

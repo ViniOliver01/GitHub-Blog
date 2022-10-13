@@ -4,6 +4,7 @@ export const Container = styled.div`
     margin: auto;
     max-width: 74rem;
     padding-inline: 10vw;
+    margin-bottom: 5rem;
 `;  
 
 export const ProfileArea = styled.div`
@@ -92,6 +93,7 @@ export const Post = styled.div`
     background-color: ${props => props.theme['base-post']};
     border-radius: 10px;
     padding: 2rem;
+    cursor: pointer;
     div{
         display: grid;
         grid-template-columns: 4fr 1fr;
