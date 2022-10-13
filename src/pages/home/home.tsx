@@ -4,15 +4,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import api from "../../services/api";
 import { useEffect, useState } from "react";
+import { formatDistanceToNow } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
 
 interface PostProps {
   id: number;
   title: string;
   description: string;
+  create_at: string;
 }
+
+export const dateFormatter = new Intl.DateTimeFormat('pt-BR');
 
 export function Home(){
   const [posts, setPosts] = useState<PostProps[]>([]);
+  const relative = new Intl.RelativeTimeFormat('pt-BR', { numeric: 'always' });
+
+  function calcTimePassed(time: string){
+    const timePassed = new Date(time);
+    const newDate = formatDistanceToNow(timePassed, {
+      addSuffix: true,
+      locale: ptBR
+    })
+    return newDate
+  }
 
   useEffect(() => {
     api
@@ -25,6 +40,7 @@ export function Home(){
       });
 
   }, []);
+  
   
   return (
     <Container>
@@ -50,17 +66,18 @@ export function Home(){
         <SearchArea>
           <div>
             <h3>Publicações</h3>
-            <span>6 publicações</span>
+            <span>{posts.length} {posts.length == 1 ? "publicação" : "publicações"}</span>
           </div>
           <SearchComponent type="text" placeholder="Buscar conteúdo"/>
         </SearchArea>
+
         <PostArea>
             {posts.map(post => {
               return (
                 <Post key={post.id}>
                   <div>
-                    <h2>{post.title}</h2>
-                    <span>Há 1 dia</span>
+                    <h2>{post.title}</h2> 
+                    <span>{calcTimePassed(post.create_at)}</span> 
                   </div>
                   <p>{post.description}</p>
                 </Post>
