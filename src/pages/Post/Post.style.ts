@@ -2,7 +2,9 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     margin: auto;
-    width: 864px;
+    max-width: 75rem;
+    padding-inline: 10vw;
+    margin-bottom: 5rem;
 `;
 
 export const PostHeader = styled.div`
