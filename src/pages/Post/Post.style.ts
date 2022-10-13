@@ -8,8 +8,8 @@ export const Container = styled.div`
 export const PostHeader = styled.div`
     background-color: ${props => props.theme['base-profile']};
     transform: translateY(-50%);
-    width: 864px;
-    height: 168px;
+    width: 100%;
+    height: fit-content;
     border-radius: 10px;
     padding: 2rem;
     h1{
@@ -45,6 +45,9 @@ export const PostBody = styled.div`
     padding: 2.5rem 2rem;
     margin-top: -5rem;
     gap: 1.5rem;
+    h2{
+        color: ${props => props.theme['blue']};
+    }
 `;
 
 export const PostNormalText = styled.div`

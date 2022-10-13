@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     margin: auto;
-    max-width: 74rem;
+    max-width: 90rem;
     padding-inline: 10vw;
     margin-bottom: 5rem;
 `;  
@@ -30,6 +30,7 @@ export const ProfileInfo = styled.div`
     margin-left: 2rem;
     margin-top: 0.5rem;
     justify-content: space-around;
+    width: 100%;
     p{
         height: 100%;
     }
@@ -44,10 +45,7 @@ export const ProfileInfo = styled.div`
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
-        img{
-            height:12px;
-            width:12px;
+           
         }
     }
 `;  
@@ -103,6 +101,7 @@ export const Post = styled.div`
         span{
             display: flex;
             justify-content: end;
+            white-space: nowrap;
         }
     }
 `;

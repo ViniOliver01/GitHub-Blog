@@ -21,7 +21,10 @@ interface PostProps {
   body: string;
   owner: string;
   created_at: string;
+  url: string;
+  comments: number;
   }
+
 interface UserProps {
   id: number;
   login: string;
@@ -44,20 +47,11 @@ export function PostsContextProvider({children}: CartContextProviderProps){
     
     useEffect(() => {
         api
-          // .get("issues?q=%20repo:ViniOliver01/GitHub-Blog")
-          .get("/post")
+          .get("issues?q=%20repo:ViniOliver01/GitHub-Blog")
+          // .get("/post")
           .then((response) => {
             setTotalPosts(response.data.total_count)
-            // setPosts({
-            //   id: response.data.items[0].id,
-            //   title: response.data.items[0].title,
-            //   description: response.data.items[0].body,
-            //   body: response.data.items[0].body,
-            //   owner: response.data.items[0].user.login,
-            //   create_at: response.data.items[0].created_at
-            //   })
             setPosts(response.data.items)
-            console.log(response.data.items)
           })
           .catch((err) => {
             console.error("ops! ocorreu um erro" + err);
@@ -71,7 +65,7 @@ export function PostsContextProvider({children}: CartContextProviderProps){
               login: data.data.login,
               name: data.data.name,
               blog: data.data.blog,
-              bio: data.data.bio
+              bio: data.data.bio,
             })
           })
           .catch((err) => {

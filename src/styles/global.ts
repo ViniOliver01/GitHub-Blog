@@ -36,6 +36,7 @@ export const GlobalStyle = createGlobalStyle`
     h4{
         color: ${props => props.theme['base-subtitle']};
         font-size: 16px;
+        font-weight: normal;
     }
     p{
         color: ${props => props.theme['base-text']};
@@ -53,6 +54,7 @@ export const GlobalStyle = createGlobalStyle`
         color: ${props => props.theme['blue']};
         font-size: 12px;
         text-decoration: none;
+        font-weight: bold;
     }
     code{
         font-family: 'Fira Code', monospace;
