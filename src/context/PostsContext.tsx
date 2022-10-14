@@ -30,6 +30,7 @@ interface UserProps {
   id: number;
   login: string;
   name: string;
+  avatar_url: string;
   blog: string;
   bio: string;
   company: string;
@@ -46,6 +47,7 @@ export function PostsContextProvider({children}: CartContextProviderProps){
     id: 0,
     login: '',
     name: '',
+    avatar_url: '',
     blog: '',
     bio: '',
     company:'',
@@ -72,6 +74,7 @@ export function PostsContextProvider({children}: CartContextProviderProps){
               id: data.data.id,
               login: data.data.login,
               name: data.data.name,
+              avatar_url: data.data.avatar_url,
               blog: data.data.blog,
               bio: data.data.bio,
               company: data.data.company,

@@ -34,9 +34,9 @@ export function Home(){
       } = useForm<SearchFormInputs>({
       resolver: zodResolver(searchFormSchema),
     });
+  console.log(user)
 
   function handleSearch(data: SearchFormInputs){
-    console.log([data.query])
     getPosts(data.query)
     reset()
   }
@@ -44,11 +44,11 @@ export function Home(){
   return (
     <Container>
         <ProfileArea>
-          <ProfileImg src={'https://github.com/vinioliver01.png'} alt="" />
+          <ProfileImg src={user.avatar_url} alt="" />
           <ProfileInfo>
             <span>
                 <h1>{user.name}</h1> 
-                <a href="https://github.com/vinioliver01" target="_blank">GITHUB <BsBoxArrowUpRight /></a>
+                <a href={`https://github.com/${user.login}`} target="_blank">GITHUB <BsBoxArrowUpRight /></a>
             </span>
                <p>{user.bio}</p> 
             <ProfileIconArea>
