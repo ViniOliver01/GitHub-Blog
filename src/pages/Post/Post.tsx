@@ -1,11 +1,13 @@
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PostsContext } from "../../context/PostsContext";
 import { Container, PostBody, PostCodeArea, PostHeader, PostIcon, PostIconArea, PostLinks, PostNormalText } from "./Post.style";
 import { formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
+
+import { IoIosArrowBack } from "react-icons/io";
+import { BsBoxArrowUpRight } from "react-icons/bs";
+import { FaCalendarDay, FaComment, FaGithub } from "react-icons/fa";
 
 interface PostProps {
   id: number;
@@ -25,6 +27,8 @@ export function Post(){
   const {id} = useParams();
   const post_id = new Number(id);
   const url = postItem?.url.replace("api.","").replace("/repos","")
+
+  console.log(posts)
 
   function FormatPost(text: PostProps){
     setPostFormatedText([''])
@@ -55,29 +59,29 @@ export function Post(){
         return setPostItem(item);
       }
     })
-  }, [])
+  }, [posts])
 
   return (
     <Container>
       <PostHeader>
         <PostLinks>
-          <a href="/"><FontAwesomeIcon icon={faGithub} /> VOLTAR</a>
-          <a href={url} target="blank">VER NO GITHUB <FontAwesomeIcon icon={faGithub} /></a>
+          <a href="/"><IoIosArrowBack size={12}/> VOLTAR</a>
+          <a href={url} target="blank">VER NO GITHUB <BsBoxArrowUpRight size={12}/></a>
         </PostLinks>
         <h1>{postItem?.title}</h1>
         <PostIconArea>
           <PostIcon>
-            <FontAwesomeIcon color="#3A536B" icon={faGithub} />
+            <FaGithub />
             <span>{user.login}</span>
           </PostIcon>
           
           <PostIcon>
-            <FontAwesomeIcon color="#3A536B" icon={faGithub} />
+            <FaCalendarDay />
             <span>{calcTimePassed(postItem?.created_at)}</span>
           </PostIcon>
 
           <PostIcon>
-            <FontAwesomeIcon color="#3A536B" icon={faGithub} />
+            <FaComment />
             <span>{postItem?.comments} {postItem?.comments == 1 ? "comentário": "comentários"}</span>
           </PostIcon>
           
@@ -107,7 +111,7 @@ export function Post(){
             return <h2 key={text}>{text}</h2>
           }
           if(text.includes("**")){
-          text = text.replace("**", "")
+          text = text.replaceAll("**", "")
           return <p key={text}>{text}</p>
           }
           else{

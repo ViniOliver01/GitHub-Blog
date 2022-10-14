@@ -1,26 +1,38 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-inline:20vw;
+    max-width:800px;
     margin: auto;
-    max-width: 75rem;
-    padding-inline: 10vw;
-    margin-bottom: 5rem;
+    @media (max-width: 700px){
+        width:fit-content;
+        margin-inline:5%;
+    }
 `;  
 
 export const ProfileArea = styled.div`
     display: flex;
+    align-items: center;
     background-color: ${props => props.theme['base-profile']};
     margin-top: -2rem;
     transform: translateY(-40%);
     padding: 2rem;
-    padding-left: 2.5rem;
-    min-width: 400px;
+    padding-left: 2.5rem; 
     border-radius: 10px;
+    transition: transform 0.8s;
+    @media (max-width: 700px){
+        transform: translateY(-20%);
+    }
 `;  
 
 export const ProfileImg = styled.img`
-    height: 148px;
-    width: 148px;
+    height: 20vw;
+    max-height: 148px;
+    min-height: 96px;
+    max-width: 100%;
     border-radius: 8px;
 `;  
 
@@ -43,21 +55,22 @@ export const ProfileInfo = styled.div`
         }
         a{
             display: flex;
-            align-items: center;
+            align-items: baseline;
             gap: 0.5rem;
-           
         }
     }
 `;  
 export const ProfileIconArea = styled.div`
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
     color: ${props => props.theme['base-label']};
     h4{  
         display: flex;
-        align-items: center;
+        align-items: baseline;
         gap: 0.5rem;
+        margin-right: 1.5rem;
     }
 `;  
 
@@ -83,15 +96,20 @@ export const SearchComponent = styled.input`
 export const PostArea = styled.div`
     margin-top: 3rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fill,minmax(22rem, 24rem));
+    flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
+    min-width: fit-content;
 `;
 
 export const Post = styled.div`
     background-color: ${props => props.theme['base-post']};
     border-radius: 10px;
     padding: 2rem;
+    /* min-width: 22rem;
+    max-width: 26rem; */
+    flex: 1 1;
     cursor: pointer;
     div{
         display: grid;

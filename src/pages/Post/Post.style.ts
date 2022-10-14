@@ -24,6 +24,8 @@ export const PostLinks = styled.div`
     justify-content: space-between;
     a{
         gap: 0.5rem;
+        display: flex;
+        align-items: baseline;
     }
 `;
 

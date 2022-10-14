@@ -31,6 +31,8 @@ interface UserProps {
   name: string;
   blog: string;
   bio: string;
+  company: string;
+  followers: number;
   }
 
 export function PostsContextProvider({children}: CartContextProviderProps){
@@ -43,6 +45,8 @@ export function PostsContextProvider({children}: CartContextProviderProps){
       name: '',
       blog: '',
       bio: '',
+      company:'',
+      followers: 0,
     });
     
     useEffect(() => {
@@ -66,6 +70,8 @@ export function PostsContextProvider({children}: CartContextProviderProps){
               name: data.data.name,
               blog: data.data.blog,
               bio: data.data.bio,
+              company: data.data.company,
+              followers: data.data.followers,
             })
           })
           .catch((err) => {

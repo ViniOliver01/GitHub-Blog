@@ -1,11 +1,22 @@
-import { Container, Post, PostArea, ProfileArea, ProfileIconArea, ProfileImg, ProfileInfo, SearchArea, SearchComponent } from "./Home.style";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useContext, useEffect, useState } from "react";
-import { formatDistanceToNow } from "date-fns";
-import ptBR from "date-fns/locale/pt-BR";
 import { useNavigate } from "react-router-dom";
 import { PostsContext } from "../../context/PostsContext";
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { formatDistanceToNow } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
+
+import { 
+          Container, 
+          Post, 
+          PostArea, 
+          ProfileArea, 
+          ProfileIconArea, 
+          ProfileImg, 
+          ProfileInfo, 
+          SearchArea, 
+          SearchComponent 
+        } from "./Home.style";
+import { BsBoxArrowUpRight, BsFillPeopleFill } from "react-icons/bs";
+import { FaBuilding, FaGithub } from "react-icons/fa";
 
 export const dateFormatter = new Intl.DateTimeFormat('pt-BR');
 
@@ -40,13 +51,13 @@ export function Home(){
           <ProfileInfo>
             <span>
                 <h1>{user.name}</h1> 
-                <a href="https://github.com/vinioliver01" target="_blank">GITHUB <FontAwesomeIcon icon={faGithub} /></a>
+                <a href="https://github.com/vinioliver01" target="_blank">GITHUB <BsBoxArrowUpRight /></a>
             </span>
                <p>{user.bio}</p> 
             <ProfileIconArea>
-                <h4><FontAwesomeIcon color="#3A536B" icon={faGithub} /> {user.login}</h4>
-                <h4><FontAwesomeIcon color="#3A536B" icon={faGithub} /> cameronwll</h4>
-                <h4><FontAwesomeIcon color="#3A536B" icon={faGithub} /> cameronwll</h4>
+                <h4><FaGithub /> {user.login}</h4>
+                {user.company == null ? '' : <h4><FaBuilding /> {user.company}</h4>}
+                <h4><BsFillPeopleFill />{user.followers} {user.followers == 1 ? "seguidor" : "seguidores"}</h4>
             </ProfileIconArea>
           </ProfileInfo>
         </ProfileArea>
@@ -71,15 +82,6 @@ export function Home(){
                 </Post>
               )
             })}
-
-
-            {/* //   id: response.data.items[0].id,
-            //   title: response.data.items[0].title,
-            //   description: response.data.items[0].body,
-            //   body: response.data.items[0].body,
-            //   owner: response.data.items[0].user.login,
-            //   create_at: response.data.items[0].created_at */}
-
         </PostArea>
     </Container>
   );
