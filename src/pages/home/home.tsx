@@ -1,12 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { PostsContext } from "../../context/PostsContext";
-import { formatDistanceToNow } from "date-fns";
-import ptBR from "date-fns/locale/pt-BR";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { 
-          Container, 
-          Post, 
+          Container,
           PostArea, 
           ProfileArea, 
           ProfileIconArea, 
@@ -17,31 +16,29 @@ import {
         } from "./Home.style";
 import { BsBoxArrowUpRight, BsFillPeopleFill } from "react-icons/bs";
 import { FaBuilding, FaGithub } from "react-icons/fa";
+import { PostItemList } from "../../components/PostItemList/PostItemList";
 
 export const dateFormatter = new Intl.DateTimeFormat('pt-BR');
 
+type SearchFormInputs = z.infer<typeof searchFormSchema>;
+const searchFormSchema = z.object({
+  query: z.string(),
+})
+
 export function Home(){
-  const { posts, totalPosts, user } = useContext(PostsContext);
-  const navigate = useNavigate();
+  const { posts, totalPosts, user, getPosts } = useContext(PostsContext);
+  const {
+    reset,
+    register, 
+    handleSubmit,
+      } = useForm<SearchFormInputs>({
+      resolver: zodResolver(searchFormSchema),
+    });
 
-  console.log(posts)
-  
-
-  function calcTimePassed(time: string){
-    const timePassed = new Date(time);
-    const newDate = formatDistanceToNow(timePassed, {
-      addSuffix: true,
-      locale: ptBR
-    })
-    return newDate
-  }
-
-  function encurtText(text: string, numbOfCharacter: number){
-    return text.substring(0, numbOfCharacter)+"..."
-  }
-
-  function formatText(text: string){
-    return text.replace("```javascript", "").replace("```", "")
+  function handleSearch(data: SearchFormInputs){
+    console.log([data.query])
+    getPosts(data.query)
+    reset()
   }
   
   return (
@@ -67,19 +64,25 @@ export function Home(){
             <h3>Publicações</h3>
             <small>{totalPosts} {totalPosts == 1 ? "publicação" : "publicações"}</small>
           </div>
-          <SearchComponent type="text" placeholder="Buscar conteúdo"/>
+          <form action="" onSubmit={handleSubmit(handleSearch)} >
+            <SearchComponent 
+              type="text" 
+              placeholder="Buscar conteúdo"
+              {...register('query')} 
+            />
+          </form>
         </SearchArea>
 
         <PostArea>
             {posts.map(post => {
               return (
-                <Post key={post.id} onClick={() => {navigate(`/post/${post.id}`);}}>
-                  <div>
-                    <h2>{encurtText(post.title, 30)}</h2> 
-                    <span>{calcTimePassed(post.created_at)}</span> 
-                  </div>
-                  <p>{encurtText(formatText(post.body), 180)}</p>
-                </Post>
+                  <PostItemList 
+                    key={post.id}
+                    id={post.id}
+                    title={post.title}
+                    body={post.body}
+                    created_at={post.created_at}
+                  />
               )
             })}
         </PostArea>

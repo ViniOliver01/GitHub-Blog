@@ -5,6 +5,7 @@ import githubApi from "../services/githubApi";
 export const PostsContext = createContext({} as PostsContextType)
 
 interface PostsContextType {
+  getPosts: (query: string) => void;
   posts: PostProps[]
   user: UserProps
   totalPosts: number
@@ -14,7 +15,7 @@ interface CartContextProviderProps {
   children: ReactNode
   }
 
-interface PostProps {
+export interface PostProps {
   id: number;
   title: string;
   description: string;
@@ -36,23 +37,24 @@ interface UserProps {
   }
 
 export function PostsContextProvider({children}: CartContextProviderProps){
-    const [posts, setPosts] = useState<PostProps[]>([]);
-    const [totalPosts, setTotalPosts] = useState(0);
-    
-    const [user, setUser] = useState<UserProps>({
-      id: 0,
-      login: '',
-      name: '',
-      blog: '',
-      bio: '',
-      company:'',
-      followers: 0,
-    });
-    
-    useEffect(() => {
-        api
-          .get("issues?q=%20repo:ViniOliver01/GitHub-Blog")
-          // .get("/post")
+  const gitHubUser = "ViniOliver01";
+  const gitHubRepo = "GitHub-Blog";
+  const [posts, setPosts] = useState<PostProps[]>([]);
+  const [totalPosts, setTotalPosts] = useState(0);
+  
+  const [user, setUser] = useState<UserProps>({
+    id: 0,
+    login: '',
+    name: '',
+    blog: '',
+    bio: '',
+    company:'',
+    followers: 0,
+  });
+
+    async function getPosts(query: string){
+      api
+          .get(`issues?q=${query}%20repo:${gitHubUser}/${gitHubRepo}`)
           .then((response) => {
             setTotalPosts(response.data.total_count)
             setPosts(response.data.items)
@@ -60,9 +62,11 @@ export function PostsContextProvider({children}: CartContextProviderProps){
           .catch((err) => {
             console.error("ops! ocorreu um erro" + err);
           });
-        
-        githubApi
-          .get("")
+    }
+    
+    async function getUserData(user: string){
+      githubApi
+          .get(user)
           .then((data) => {
             setUser({
               id: data.data.id,
@@ -77,12 +81,17 @@ export function PostsContextProvider({children}: CartContextProviderProps){
           .catch((err) => {
             console.error("ops! ocorreu um erro" + err);
           });
+    }
     
+    useEffect(() => {
+      getPosts("");
+      getUserData(gitHubUser);
       }, []);
 
     return (
         <PostsContext.Provider 
         value={{
+            getPosts,
             posts,
             totalPosts,
             user

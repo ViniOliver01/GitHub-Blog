@@ -91,6 +91,7 @@ export const SearchComponent = styled.input`
     border: 1px solid ${props => props.theme['base-border']};
     height: 50px;
     padding: 0.75rem 1rem;
+    width: 100%;
 `;
 
 export const PostArea = styled.div`
@@ -101,25 +102,4 @@ export const PostArea = styled.div`
     gap: 2rem;
     justify-content: center;
     min-width: fit-content;
-`;
-
-export const Post = styled.div`
-    background-color: ${props => props.theme['base-post']};
-    border-radius: 10px;
-    padding: 2rem;
-    /* min-width: 22rem;
-    max-width: 26rem; */
-    flex: 1 1;
-    cursor: pointer;
-    div{
-        display: grid;
-        grid-template-columns: 4fr 1fr;
-        margin-bottom: 1.25rem;
-        gap: 1rem;
-        span{
-            display: flex;
-            justify-content: end;
-            white-space: nowrap;
-        }
-    }
 `;
