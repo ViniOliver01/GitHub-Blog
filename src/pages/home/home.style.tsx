@@ -7,6 +7,7 @@ export const Container = styled.div`
     margin-inline:20vw;
     max-width:800px;
     margin: auto;
+    padding-bottom: 5rem;
     @media (max-width: 700px){
         width:fit-content;
         margin-inline:5%;
