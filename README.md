@@ -11,7 +11,7 @@
 #
 > Trilha Ignite
 
-Projeto contruído apartir do desafio 03 do curso Ignite da Rocketseat
+Projeto construído a partir do desafio 03 do curso Ignite da Rocketseat
 
 [ 🔗 Clique aqui para acessar](https://vinioliver01.github.io/GitHub-Blog/)
 
