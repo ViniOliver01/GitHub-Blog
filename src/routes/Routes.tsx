@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import { LayoutContainer } from '../components/header/LayoutContainer';
 
-import { Post } from '../pages/Post/Post';
 import { Home } from '../pages/Home/Home';
+import { Post } from '../pages/Post/Post';
 
 
 export function Router(){
