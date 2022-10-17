@@ -1,4 +1,4 @@
-# NLW eSports 
+# GitHub Blog
 
 ## Home
 ### Pagina inicial onde mostra as informações de usuario, e as insues do proprio projeto provindas via API
