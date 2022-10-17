@@ -1,8 +1,8 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { LayoutContainer } from '../components/header/LayoutContainer';
 
-import { Home } from '../pages/Home/Home';
 import { Post } from '../pages/Post/Post';
+import { Home } from '../pages/Home/Home';
 
 
 export function Router(){
