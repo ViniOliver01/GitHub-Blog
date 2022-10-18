@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PostsContext } from "../../context/PostsContext";
-import { Container, PostBody, PostCodeArea, PostHeader, PostIcon, PostIconArea, PostLinks, PostNormalText } from "./Post.style";
+import { Container, PostBody, PostCodeArea, PostHeader, PostIcon, PostIconArea, PostLinks } from "./Post.style";
 import { formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 
