@@ -54,10 +54,6 @@ export const PostBody = styled.div`
     }
 `;
 
-export const PostNormalText = styled.div`
-
-`;
-
 export const PostCodeArea = styled.div`
     background-color:  ${props => props.theme['base-post']};
     padding: 1rem;
