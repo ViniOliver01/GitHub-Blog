@@ -3,8 +3,6 @@ import { formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import { useNavigate } from "react-router-dom";
 
-export const dateFormatter = new Intl.DateTimeFormat('pt-BR');
-
 interface PostItemListProps{
     id: number;
     title: string;

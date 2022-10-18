@@ -18,7 +18,6 @@ import { BsBoxArrowUpRight, BsFillPeopleFill } from "react-icons/bs";
 import { FaBuilding, FaGithub } from "react-icons/fa";
 import { PostItemList } from "../../components/PostItemList/PostItemList";
 
-export const dateFormatter = new Intl.DateTimeFormat('pt-BR');
 
 type SearchFormInputs = z.infer<typeof searchFormSchema>;
 const searchFormSchema = z.object({
